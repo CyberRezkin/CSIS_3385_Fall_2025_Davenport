@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Submit User Info</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Create User</h2>
+
+    <form action="/inventory/search" method="POST">
+	<fieldset>
+	    <legend>User Information</legend>
+		
+        <label for="username">Username:</label>
+        <input id="username" name="username" type="text" placeholder="Enter your username" required autocomplete="username" maxlength="20" />
+
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password" placeholder="Enter password" required autocomplete="new-password" minlength="10" maxlength="24" />
+
+        <label for="age">Age:</label>
+        <input id="age" name="age" type="number" placeholder="Enter your age" required min="1" max="125" />
+
+        <label for="email">Email:</label>
+        <input id="email" name="email" type="email" placeholder="Enter email" required autocomplete="email" />
+
+        <label for="message">Message (10 words or less):</label>
+        <textarea id="message" name="message" placeholder="Enter brief message" ></textarea>
+	<small id="word-count">0/10 words</small>
+    </fieldset>
+
+	<script>
+	const messageField = document.getElementById('message');
+	const wordCountDisplay = document.getElementById('word-count');
+
+	messageField.addEventListener('input', () => {
+		const words = messageField.value.trim().split(/\s+/).filter(word => word.length > 0);
+		if (words.length > 10) {
+			messageField.value = words.slice(0, 10).join(' ');
+		}
+		wordCountDisplay.textContent = `${messageField.value.trim().split(/\s+/).filter(word => word.length > 0).length}/10 words`;
+
+	});
+	</script>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
